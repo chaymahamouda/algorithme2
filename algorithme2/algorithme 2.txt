@@ -1,0 +1,364 @@
+ALGORITHM traverse_array
+VAR
+   tab : ARRAY_OF INTEGER[5]; 
+   i : INTEGER; 
+BEGIN
+  tab := {1,2,3,5,7,8}; 
+  Write('Print Array :')
+  FOR i FROM 0 TO 4 STEP 1  DO   
+     Write(tab[i])
+  END_FOR
+
+       Write(tab[i])
+   END_FOR
+END
+
+
+ALGORITHM insertion_array
+VAR
+   tab : ARRAY_OF INTEGER[5];
+   i,j, pos, elt : INTEGER;
+BEGIN
+   FOR i FROM 0 TO 3 DO
+       Read(tab[i]);
+   END_FOR
+
+   Write("give the element to insert");
+   Read(elt);
+   Write("give the position to insert in array");
+   Read(pos);
+   j := tab.length;
+   WHILE (j >= pos) DO
+       tab[j+1] := tab[j]; 
+       j := j-1; 
+   END_WHILE
+
+   tab[pos] := elt;
+   
+END
+
+ALGORITHM search_array
+VAR
+   tab : ARRAY_OF INTEGER[5];
+   i,j, pos, elt : INTEGER;
+BEGIN
+   FOR i FROM 0 TO 4 DO
+       Read(tab[i]);
+   END_FOR
+
+   Write("give the element to search of");
+   Read(elt);
+
+   j := 0;
+   WHILE (j < tab.length) DO
+       IF (tab[j] = elt) THEN
+           BREAK; 
+       END_IF
+       j := j+1; 
+   END_WHILE
+
+   IF (j = tab.length) THEN  
+       pos := -1; 
+   ELSE
+       pos := j;
+   END_IF
+
+   Write("The position of the element is ", pos);
+END
+
+
+ALGORITHM deletion_array
+VAR
+   tab : ARRAY_OF INTEGER[5];
+   i,j, pos : INTEGER;
+BEGIN
+   FOR i FROM 0 TO 4 DO
+       Read(tab[i]);
+   END_FOR
+
+   Write("give the position to delete");
+   Read(pos);
+
+   j := pos;
+   WHILE (j < tab.length) DO
+       tab[j] := tab[j+1];
+       j := j+1; 
+   END_WHILE
+
+
+END
+
+matrix_name : ARRAY_OF type[nb_line][nb_column];
+
+m : ARRAY_OF INTEGER[M][N];
+FOR i FROM 0 TO M-1 DO
+    FOR j FROM 0 TO N-1 DO
+        m[i][j] :=0;
+    END_FOR
+END_FOR
+
+a : ARRAY_OF FLOAT[M][N];
+b : ARRAY_OF FLOAT[N][O];
+c : ARRAY_OF FLOAT[M][O];
+FOR i FROM 0 TO M-1 DO
+    FOR j FROM 0 TO O-1 DO
+        FOR k FROM 0 TO N-1 DO
+            // Compute dot product of row i and column j
+            c[i][j] := c[i][j] + a[i][k] *b[k][j];
+        END_FOR
+    END_FOR
+END_FOR
+
+
+str_name : STRING[size];
+
+str : STRING[] := "GoMyCode";
+str : STRING[50] := "GoMyCode";
+str : STRING[] := {'G','o','M','y','C','o','d','e'};
+
+
+
+
+ALGORITHM compare_two_strings
+VAR
+   str1, str2, : STRING[50];
+   i : INTEGER;
+BEGIN
+   Write("Give the first string to compare");
+   Read(str1);
+   Write("Give the second string to compare");
+   Read(str2);
+
+   IF (str1.length <> str2.length) THEN
+       Write("The Strings are not equals");
+   ELSE
+       FOR i FROM 0 TO str1.length-1 STEP 1 DO
+           IF (str1[i]<>str2[i]) THEN
+               BREAK;
+           END_IF
+       END_FOR
+       IF (i = str1.length) THEN
+           Write("The Strings are equals");
+       ELSE
+           Write("The Strings are not equals");
+       END_IF
+   END_IF
+  
+END
+
+
+ALGORITHM compare_ignore_two_strings
+VAR
+   str1, str2, : STRING[50];
+   i : INTEGER;
+BEGIN
+   Write("Give the first string to compare");
+   Read(str1);
+   Write("Give the second string to compare");
+   Read(str2);
+
+   IF (str1.length <> str2.length) THEN
+       Write("The Strings are not equals");
+   ELSE
+       str1 := ToUpper(str1);
+       str2 := ToUpper(str2);
+       FOR i FROM 0 TO str1.length-1 STEP 1 DO
+           IF (str1[i]<>str2[2]) THEN
+               BREAK;
+           END_IF
+       END_FOR
+       IF (i = str1.length-1) THEN
+           Write("The Strings are equals");
+       ELSE
+           Write("The Strings are not equals");
+       END_IF
+   END_IF
+  
+END
+
+ALGORITHM delete_blank_begin
+VAR
+   str : STRING[] := "   GoMyCode";
+   i : INTEGER := 0;
+   j : INTEGER := 0;
+BEGIN
+   WHILE ( str[0]=' ') DO
+       j := 0;
+       WHILE (j < str.length) DO
+           str[j] := str[j+1]; 
+           j := j+1; 
+       END_WHILE
+   END_WHILE
+END
+
+ALGORITHM array_struct_exp
+VAR
+    Point : STRUCT
+                x : INTEGER;
+                y : INTEGER;
+            END_STRUCT
+    arr : ARRAY_OF Point[10];
+BEGIN
+    arr[0].x := 10;
+    arr[0].y := 20;
+
+    Write(arr[0].x, arr[0].y);
+END
+
+
+
+ALGORITHM valid_parentheses
+VAR
+   state_stack : CHAR;
+   c : CHAR := ' ';
+   stk : STACK;
+   wrong : BOOLEAN := FALSE;
+BEGIN
+   WHILE (c <> '#' AND NOT wrong) DO
+       Read(c);
+       SWITCH (c) DO
+           case '[':
+           case '{':
+           case '(': stk.push(c);
+                           state_stack := stk.peek(); 
+                           Write(state_stack);
+                           BREAK;
+           case ']': IF (stp.peek()='[') THEN
+                               state_stack := stk.pop(); 
+                               Write(state_stack);
+                           ELSE
+                               wrong := TRUE;
+                           END_IF 
+                           BREAK;
+           case ')': IF (stp.peek()='(') THEN
+                               state_stack := stk.pop(); 
+                               Write(state_stack);
+                           ELSE
+                               wrong := TRUE;   
+                           END_IF 
+                           BREAK;
+           case '}': IF (stp.peek()='{') THEN
+                               state_stack := stk.pop();
+                               Write(state_stack);
+                           ELSE
+                               wrong := TRUE;
+                           END_IF 
+                           BREAK;
+                          
+       END_SWITCH
+
+      
+   END_WHILE
+
+   IF (stk.isEmpty() AND NOT wrong) THEN
+       Write("Empty stack, so brackets match.");
+   ELSE
+       Write("Stack not empty, so brackets don’t match.");
+   END_IF
+END
+
+
+
+ALGORITHM inverse_stack
+VAR
+   stk : STACK;
+   qu  : QUEUE;
+BEGIN
+
+   WHILE (NOT stk.isEmpty()) DO
+       qu.enqueue(stk.pop());
+   END_WHILE
+
+   WHILE (NOT qu.isEmpty()) DO
+       stk.push(qu.dequeue());
+   END_WHILE
+
+END
+
+
+
+ALGORITHM hash
+VAR
+  
+   htab : HASH_TABLE<INTEGER,STRING>;
+   
+  
+BEGIN
+   htab : HASH_TABLE<INTEGER,STRING>;
+
+   htab.insert(0,"zero");
+   htab.insert(1,"one");
+   htab.insert(2,"two");
+   htab.insert(3,"three");
+   Write(htab);
+
+   htab.lookup(0); 
+   htab.lookup(5); 
+
+
+   htab.get(0); 
+
+   htab.delete(0);
+
+   
+   htab.insert(3,"three-a");
+   htab.insert(3,"three-b");
+
+   htab.get(3) 
+   htab.insert(3,"three-a");
+   htab.insert(4,"three-a");
+   HASH_TABLE<STRING,CHAR>
+   FUNCTION hash_function(STRING str) : INTEGER
+   BEGIN
+       RETURN str.length;
+   END
+END
+
+
+ALGORITHM first_non_repeated_char
+VAR
+   htab : HASH_TABLE<CHAR,INTEGER>;
+   str : STRING[50];
+   i,count : INTEGER;
+   ch : CHAR;
+BEGIN
+   Read(str);
+   FOR i FROM 0 TO str.length -1 STEP 1  DO
+       IF (htab.lookup(str[i]) = TRUE) THEN
+           count := htab.get(str[i]);
+           htab.insert(str[i],count+1);
+       ELSE
+           htab.insert(str[i],1);
+       END_IF
+   END_FOR
+   FOR i FROM 0 TO str.length -1 STEP 1  DO
+       IF (htab.get(str[i]) = 1) THEN
+           ch := str[i];
+           BREAK;
+       END_IF
+   END_FOR
+
+   Write(ch);
+END
+
+
+ALGORITHM create_linked_list
+VAR
+   List:   STRUCT
+             
+           END_STRUCT
+   first : ^List := NULL; 
+   p : ^List := NULL;
+   c   : CHAR;
+   i :INTEGER :=0;
+BEGIN
+   WHILE (i<3) DO
+      
+       Read(c);
+       p := create(List);
+       p^.data := c;
+       p^.next := first;
+       first := p;
+       i := i+1;
+   END_WHILE
+END
